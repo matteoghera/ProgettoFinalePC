@@ -11,9 +11,9 @@ jps
 
 #copio i file nel hdfs
 /home/matteoinformatica/Scrivania/hadoop-2.9.0/bin/hadoop dfsadmin -safemode leave #eventualmente lascia la safemode
-/home/matteoinformatica/Scrivania/hadoop-2.9.0/bin/hdfs dfs -copyFromLocal /home/matteoinformatica/Documenti/secondoProgettoPC/progetto/BloomFilterHadoop/input #cambiare path
+/home/matteoinformatica/Scrivania/hadoop-2.9.0/bin/hdfs dfs -copyFromLocal /home/matteoinformatica/Documenti/Github/secondoProgettoPC/ProgettoFinalePC/BloomFilterHadoop/input #cambiare path
 /home/matteoinformatica/Scrivania/hadoop-2.9.0/bin/hadoop dfsadmin -safemode leave
-/home/matteoinformatica/Scrivania/hadoop-2.9.0/bin/hdfs dfs -copyFromLocal /home/matteoinformatica/Documenti/secondoProgettoPC/progetto/BloomFilterHadoop/output #cambiare path
+/home/matteoinformatica/Scrivania/hadoop-2.9.0/bin/hdfs dfs -copyFromLocal /home/matteoinformatica/Documenti/Github/secondoProgettoPC/ProgettoFinalePC/BloomFilterHadoop/output #cambiare path
 
 #eseguo file .jar
 /home/matteoinformatica/Scrivania/hadoop-2.9.0/bin/hadoop jar target/BloomFilterHadoop-0.0.1-SNAPSHOT.jar com.unifi.pc.gc.bloom.app.HadoopBloomFilterApp 100 input/sample.txt input/people.txt output
