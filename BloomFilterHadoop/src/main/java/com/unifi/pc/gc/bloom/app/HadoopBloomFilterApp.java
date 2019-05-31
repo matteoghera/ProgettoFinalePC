@@ -20,9 +20,9 @@ import com.unifi.pc.gc.bloom.utility.StringHashFunction;
 public class HadoopBloomFilterApp {
 
 	public static void main(String[] args) throws Exception {
-		//args[]={n, pathSample, pathDataFlow, pathOutputDirectory}
+		//args[]={n, pathSample, pathDataFlow, pathOutputDirectoryHdfs, LocalPathOutputDirectory}
 		
-		if(args.length<4) {
+		if(args.length<5) {
 			System.err.println("args must be in the form: args[]={numberOfThreads, n, fileSampleName, fileDataFlowName}");
 			System.exit(-1);
 		}
@@ -66,7 +66,7 @@ public class HadoopBloomFilterApp {
 		//Report the time of execution
 		
 		try {
-			FileWriter fw=new FileWriter(args[3]+"/bloomfilter_time", true);
+			FileWriter fw=new FileWriter(args[4]+"/bloomfilter_time", true);
 			PrintWriter out=new PrintWriter(fw);
 			String row=new String(new SimpleDateFormat("yyyy.MM.dd 'at' HH:mm:ss").format(Calendar.getInstance().getTime())+" Execution Time: "+executionTime);
 			out.println(row);

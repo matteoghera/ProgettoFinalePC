@@ -16,7 +16,7 @@ jps
 /home/matteoinformatica/Scrivania/hadoop-2.9.0/bin/hdfs dfs -copyFromLocal /home/matteoinformatica/Documenti/secondoProgettoPC/progetto/BloomFilterHadoop/output #cambiare path
 
 #eseguo file .jar
-/home/matteoinformatica/Scrivania/hadoop-2.9.0/bin/hadoop jar target/BloomFilterHadoop-0.0.1-SNAPSHOT.jar com.unifi.pc.gc.bloom.app.HadoopBloomFilterApp 100 input/sample.txt input/people.txt output
+/home/matteoinformatica/Scrivania/hadoop-2.9.0/bin/hadoop jar target/BloomFilterHadoop-0.0.1-SNAPSHOT.jar com.unifi.pc.gc.bloom.app.HadoopBloomFilterApp 100 input/sample.txt input/people.txt output output
 
 #visualizzo risultati
 /home/matteoinformatica/Scrivania/hadoop-2.9.0/bin/hdfs dfs -cat output/bloomfilter/*
