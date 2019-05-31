@@ -18,7 +18,7 @@ bin/hadoop dfsadmin -safemode leave
 bin/hdfs dfs -copyFromLocal ${secondProjectPCPath}/BloomFilterHadoop/output #cambiare path
 
 #eseguo file .jar
-bin/hadoop jar ${secondProjectPCPath}/BloomFilterHadoop/target/BloomFilterHadoop-0.0.1-SNAPSHOT.jar com.unifi.pc.gc.bloom.app.HadoopBloomFilterApp 100 input/sample.txt input/people.txt ${secondProjectPCPath}/BloomFilterHadoop/output
+bin/hadoop jar ${secondProjectPCPath}/BloomFilterHadoop/target/BloomFilterHadoop-0.0.1-SNAPSHOT.jar com.unifi.pc.gc.bloom.app.HadoopBloomFilterApp 100 input/sample.txt input/people.txt output ${secondProjectPCPath}/BloomFilterHadoop/output
 
 #visualizzo risultati
 bin/hdfs dfs -cat output/bloomfilter/*
