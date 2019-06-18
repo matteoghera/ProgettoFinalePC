@@ -6,7 +6,9 @@ import java.util.List;
 import com.unifi.pc.gc.bloom.utility.HashFunction;
 
 public class BloomFilter<T> {
+	//filter
 	private boolean[] map;
+	//hash functions
 	private List<HashFunction<T>> myHashFunctionList;
 
 //constructor
@@ -33,7 +35,6 @@ public class BloomFilter<T> {
 		while (hashFunctionIterator.hasNext()) {
 			HashFunction<T> currentHashFunction = hashFunctionIterator.next();
 			int hash=currentHashFunction.compute(element);
-			//System.out.println("Stringa: "+element.toString()+", valore hash: "+ hash);
 			map[hash] = true;
 		}
 	}

@@ -1,7 +1,6 @@
 package com.unifi.pc.gc.bloom.core;
 import static org.junit.Assert.*;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
@@ -14,25 +13,25 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.unifi.pc.gc.bloom.utility.HashFunction;
-import com.unifi.pc.gc.bloom.utility.Tools;
+import com.unifi.pc.gc.bloom.utility.SimpleHashFunction;
 
 public class ParallelBloomFilterTest {
 	ParallelBloomFilter myParallelFilter;
-	List<Integer> sample;
-	List<Integer> dataFlow;
+	List<String> sample;
+	List<String> dataFlow;
 	Thread myThread;
 	
 	
 	@Before
 	public void setUp(){
-		int[] elements = {356,678,432};
+		String[] elements = {"aaa","bbb","ccc"};
 		sample=createSet(elements);
-		int[] setElements= {345,654, 987, 567, 123, 456, 789, 978, 125, 145, 176};
+		String[] setElements= {"aaa","bbb","ccc", "ddd","eee","fff","ggg","hhh","iii","zzz"};
 		dataFlow=createSet(setElements);
 		
-		List<HashFunction<Integer>> myHashFunctionList=new ArrayList<HashFunction<Integer>>();	
-		myHashFunctionList.add(new HashFunction<Integer>(10));
-		BloomFilter<Integer> filter=new BloomFilter<Integer>(10, myHashFunctionList);
+		List<HashFunction<String>> myHashFunctionList=new ArrayList<HashFunction<String>>();	
+		myHashFunctionList.add(new SimpleHashFunction<String>(10));
+		BloomFilter<String> filter=new BloomFilter<String>(10, myHashFunctionList);
 		int threads= 2;
 		
 		myParallelFilter=new ParallelBloomFilter (filter, sample, dataFlow, threads);
@@ -55,7 +54,8 @@ public class ParallelBloomFilterTest {
 	public void testChunkSample() {
 		runParallelFilter();
 		while(myThread.isAlive());
-		List<Integer> result=myParallelFilter.getChunksListSample();
+		List<String> result=myParallelFilter.getChunksListSample();
+		
 		assertEquals(sample, result);
 	}
 	
@@ -64,7 +64,7 @@ public class ParallelBloomFilterTest {
 	public void testChunkDataFlow() {
 		runParallelFilter();
 		while(myThread.isAlive());
-		List<Integer> result=myParallelFilter.getChunksListDataFlow();
+		List<String> result=myParallelFilter.getChunksListDataFlow();
 		assertEquals(dataFlow, result);
 	}
 
@@ -72,12 +72,12 @@ public class ParallelBloomFilterTest {
 	public void testResult() {
 		runParallelFilter();
 		while(myThread.isAlive());
-		assertEquals(8, myParallelFilter.getRejectedNumber());
+		assertEquals(7, myParallelFilter.getRejectedNumber());
 		assertEquals(3, myParallelFilter.getAdmittedNumber());
 	}
 
-	private List<Integer> createSet(int[] elements) {
-		List<Integer> mySet=new ArrayList<>();
+	private List<String> createSet(String[] elements) {
+		List<String> mySet=new ArrayList<>();
 		for(int i=0; i<elements.length; i++) {
 			mySet.add(elements[i]);
 		}
@@ -87,19 +87,11 @@ public class ParallelBloomFilterTest {
 	private void runParallelFilter() {
 		myThread=new Thread(myParallelFilter);
 		myThread.start();
+	//	myParallelFilter.run();
 	}
 	
 	
 }
-
-
-
-
-
-
-
-
-
 
 
 

@@ -45,11 +45,9 @@ public class SequentialBloomFilterApp {
 		fileSampleName=args[2];
 		fileDataFlowName=args[3];
 		
-		
 		initializeApp();
 		BloomFilter<String> filter=new BloomFilter<>(n, myHashFunctionList);
-		
-		
+				
 		long beginExecution=System.currentTimeMillis();
 		
 		filter.initializeMap(sample);

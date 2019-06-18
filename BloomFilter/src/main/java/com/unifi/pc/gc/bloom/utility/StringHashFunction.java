@@ -1,9 +1,10 @@
 package com.unifi.pc.gc.bloom.utility;
 
-public class StringHashFunction<T> extends HashFunction<T> {
+public class StringHashFunction<T> implements HashFunction<T> {
+	private int n;
 
 	public StringHashFunction(int n) {
-		super(n);
+		this.n=n;
 	}
 
 	@Override

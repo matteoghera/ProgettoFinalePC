@@ -36,6 +36,7 @@ public class ParallelBloomFilterApp {
 	}
 
 	public static void main(String[] args) {
+		
 		//args[]={numberOfThreads, n, fileSampleName, fileDataFlowName}
 		//example: 10 100 sample.txt people.txt
 		
@@ -49,23 +50,14 @@ public class ParallelBloomFilterApp {
 		fileDataFlowName=args[3];
 		
 		initializeApp();
-		BloomFilter<String> filter = new BloomFilter<>(n, myHashFunctionList);
+		BloomFilter<String> filter = new BloomFilter<> (n, myHashFunctionList);
 		ParallelBloomFilter pfilter = new ParallelBloomFilter(filter, sample, dataFlow, numberOfThreads);
-		Thread myThread=new Thread(pfilter);
 		
-		
-		
+			
+
 		long beginExecution=System.currentTimeMillis();
-		
-		
-		
-		
-		myThread.start();
-		
-		while(myThread.isAlive());
-		
-		
-		
+		pfilter.run();
+				
 		
 		
 		long endExecution=System.currentTimeMillis();
@@ -101,3 +93,4 @@ public class ParallelBloomFilterApp {
 	}
 
 }
+

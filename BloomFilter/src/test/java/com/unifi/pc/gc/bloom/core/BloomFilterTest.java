@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.unifi.pc.gc.bloom.utility.HashFunction;
+import com.unifi.pc.gc.bloom.utility.SimpleHashFunction;
 import com.unifi.pc.gc.bloom.utility.StringHashFunction;
 
 public class BloomFilterTest {
@@ -78,7 +79,7 @@ public class BloomFilterTest {
 		sample=createSet(sampleElements);
 		
 		List<HashFunction<Integer>>myHashFunctionList=new ArrayList<HashFunction<Integer>>();
-		myHashFunctionList.add(new HashFunction<>(10));
+		myHashFunctionList.add(new SimpleHashFunction<>(10));
 		myBloomFilter=new BloomFilter<>(10, myHashFunctionList);
 		
 		myBloomFilter.initializeMap(sample);
@@ -108,14 +109,14 @@ public class BloomFilterTest {
 
 	private void moreHashFunctionsTestsSupport() {
 		myHashFunctionList.add(new StringHashFunction<Integer>(n));
-		myHashFunctionList.add(new HashFunction<Integer>(n));
+		myHashFunctionList.add(new SimpleHashFunction<Integer>(n));
 		myBloomFilter=new BloomFilter<Integer>(n, myHashFunctionList);
 		int[] elements = {3569,6787,4321, 7761};
 		sample=createSet(elements);
 	}
 
 	private void oneHashFunctionTestsSupport() {
-		myHashFunctionList.add(new HashFunction<Integer>(n));
+		myHashFunctionList.add(new SimpleHashFunction<Integer>(n));
 		myBloomFilter=new BloomFilter<Integer>(n, myHashFunctionList);
 		int[] elements = {3569,6787,4321};
 		sample=createSet(elements);
