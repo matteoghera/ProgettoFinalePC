@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.concurrent.Semaphore;
 
 public class InitializeBloomThreads  implements Runnable{
-	private static BloomFilter  filter;
-	private List chunk;
+	private static BloomFilter<String>  filter;
+	private List<String> chunk;
 	private static Semaphore analysisPhaseSem;
 	
 
-	public InitializeBloomThreads(List chunk) {
+	public InitializeBloomThreads(List<String> chunk) {
 		super();
 		this.chunk=chunk;
 	}
@@ -22,18 +22,16 @@ public class InitializeBloomThreads  implements Runnable{
 
 
 
-	public static void setBloomFilter(BloomFilter  myfilter){
+	public static void setBloomFilter(BloomFilter<String>  myfilter){
 		InitializeBloomThreads.filter = myfilter;
 		
 	}
 
-
+   
 	@Override
 	public void run() {
 		InitializeBloomThreads.filter.initializeMap(chunk);
-		synchronized(this) {
 			analysisPhaseSem.release();
-		}
 	}
 	
 

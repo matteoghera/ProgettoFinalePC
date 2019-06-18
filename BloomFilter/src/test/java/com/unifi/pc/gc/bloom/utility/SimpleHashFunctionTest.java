@@ -10,7 +10,7 @@ public class SimpleHashFunctionTest {
 
 	@Before
 	public void setUp() throws Exception {
-		myHashFunction=new HashFunction<Integer>(10);
+		myHashFunction=new SimpleHashFunction<Integer>(10);
 	}
 
 	@Test

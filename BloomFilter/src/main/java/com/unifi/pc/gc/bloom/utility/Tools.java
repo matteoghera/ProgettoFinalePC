@@ -12,12 +12,14 @@ import java.util.List;
 
 public class Tools {
 
-// read the file
+private static BufferedReader in;
+
+	// read the file
 	public static List<String> readFile(String filepath) {
 		List<String> rows=new ArrayList<String>();
 		try {
 			FileReader fr =new FileReader(filepath);
-			BufferedReader in =new BufferedReader(fr);
+			in = new BufferedReader(fr);
 			String row =in .readLine();
 			while(row!=null) {
 				rows.add(row);
