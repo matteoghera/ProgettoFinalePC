@@ -51,9 +51,16 @@ public class SequentialBloomFilterApp {
 		long beginExecution=System.currentTimeMillis();
 		
 		filter.initializeMap(sample);
+		
+		long beforeAnal=System.currentTimeMillis();
+
 		int[] numbers=filter.analyze(dataFlow);
 		
 		long endExecution=System.currentTimeMillis();
+
+		long initializationTime= beforeAnal-beginExecution;
+
+		long analysisTime= endExecution-beforeAnal;
 		
 		
 		
@@ -64,7 +71,6 @@ public class SequentialBloomFilterApp {
 		int numberOfOnes=filter.getNumberOfOnes();
 		int numberOfElementsAdmitted=numbers[0];
 		int numberOfElementsRejected=numbers[1];
-		long executionTime=endExecution-beginExecution;
 		
 		
 		String result="Sequential execution Results:\n";
@@ -73,7 +79,8 @@ public class SequentialBloomFilterApp {
 		result=result+"Number of elements analyzed: "+numberOfElementsAnalyzed+"\t"+ "Number of ones: "+numberOfOnes+"\n\n";
 		result=result+"Number of elements admitted: "+numberOfElementsAdmitted+"\t"+ "Number of elements rejected: "+numberOfElementsRejected+"\n\n\n";
 		
-		result=result+"Execution time: "+ executionTime+" ns\n\n";
+		result=result+"Analysis phase execution time: "+ initializationTime+" ms\n\n";
+		result=result+"Initialization  phase execution time: "+ analysisTime+" ms\n\n";
 		
 		System.out.println(result);
 	}

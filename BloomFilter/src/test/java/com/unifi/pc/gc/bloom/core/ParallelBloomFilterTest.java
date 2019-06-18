@@ -19,7 +19,7 @@ public class ParallelBloomFilterTest {
 	ParallelBloomFilter myParallelFilter;
 	List<String> sample;
 	List<String> dataFlow;
-	Thread myThread;
+	//Thread myThread;
 	
 	
 	@Before
@@ -53,7 +53,6 @@ public class ParallelBloomFilterTest {
 	@Test
 	public void testChunkSample() {
 		runParallelFilter();
-		while(myThread.isAlive());
 		List<String> result=myParallelFilter.getChunksListSample();
 		
 		assertEquals(sample, result);
@@ -63,7 +62,6 @@ public class ParallelBloomFilterTest {
 	@Test
 	public void testChunkDataFlow() {
 		runParallelFilter();
-		while(myThread.isAlive());
 		List<String> result=myParallelFilter.getChunksListDataFlow();
 		assertEquals(dataFlow, result);
 	}
@@ -71,7 +69,6 @@ public class ParallelBloomFilterTest {
 	@Test
 	public void testResult() {
 		runParallelFilter();
-		while(myThread.isAlive());
 		assertEquals(7, myParallelFilter.getRejectedNumber());
 		assertEquals(3, myParallelFilter.getAdmittedNumber());
 	}
@@ -85,9 +82,7 @@ public class ParallelBloomFilterTest {
 	}
 	
 	private void runParallelFilter() {
-		myThread=new Thread(myParallelFilter);
-		myThread.start();
-	//	myParallelFilter.run();
+	myParallelFilter.execute();
 	}
 	
 	
