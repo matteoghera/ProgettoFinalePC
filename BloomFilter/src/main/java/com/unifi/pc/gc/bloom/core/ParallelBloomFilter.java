@@ -10,7 +10,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
-public class ParallelBloomFilter implements Runnable {
+public class ParallelBloomFilter {
 	private Semaphore analysisPhaseSem, reportPhaseSem;
 	private List<String> sample, dataFlows;
 	private ExecutorService myThreads;
@@ -57,18 +57,33 @@ public class ParallelBloomFilter implements Runnable {
 
 
 //parallel execution using initialization and analysis threads 
-	public void run() {
+	public long[] execute() {
+		long[] rst={0,0};
+		long beginExecutionInit=0,endExecution=0,beginExecutionAnal=0 ;
+
 		try {
+			beginExecutionInit=System.currentTimeMillis();			
 			createInitThreads();
+			beginExecutionAnal=System.currentTimeMillis();			
 			createAnalyzeThreads();
+			
+
      		myThreads.shutdown();
 			if (!myThreads.awaitTermination(60000, TimeUnit.SECONDS)) {
 			    System.err.println("Threads didn't finish in 60000 seconds!");
 			}
+		 endExecution=System.currentTimeMillis();
+			
 		} catch (InterruptedException e) {
 			System.out.println("Semaphore 2: error");
 			System.exit(-1);
 		}
+		rst[0]=beginExecutionAnal-beginExecutionInit;
+		rst[1]=endExecution-beginExecutionAnal;
+		
+		return rst;
+		
+
 	}
 
 //initialization threads creation

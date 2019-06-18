@@ -53,14 +53,16 @@ public class ParallelBloomFilterApp {
 		BloomFilter<String> filter = new BloomFilter<> (n, myHashFunctionList);
 		ParallelBloomFilter pfilter = new ParallelBloomFilter(filter, sample, dataFlow, numberOfThreads);
 		
+		long[]rst=null;
 			
 
-		long beginExecution=System.currentTimeMillis();
-		pfilter.run();
-				
-		
-		
-		long endExecution=System.currentTimeMillis();
+		rst=pfilter.execute();
+			
+		long initTime=rst[0];	
+
+		long analTime=rst[1];			
+
+
 		
 
 		
@@ -73,7 +75,8 @@ public class ParallelBloomFilterApp {
 		int numberOfOnes = filter.getNumberOfOnes();
 		int numberOfElementsRejected=pfilter.getRejectedNumber();
 		int numberOfElementsAdmitted=pfilter.getAdmittedNumber();
-		long executionTime=endExecution-beginExecution;
+		long phaseAnalysisTime=initTime;
+		long phaseExecutionTime=analTime;
 		
 
 		String result = "Parallel execution Results:\n";
@@ -87,7 +90,9 @@ public class ParallelBloomFilterApp {
 		result = result + "Number of elements admitted: " + numberOfElementsAdmitted + "\t"
 				+ "Number of elements rejected: " + numberOfElementsRejected + "\n\n\n";
 		
-		result=result+"Execution time: "+ executionTime+" ns\n\n";
+		result=result+"Analysis phase execution time: "+ phaseAnalysisTime+" ms\n\n";
+		result=result+"Initialization  phase execution time: "+ phaseExecutionTime+" ms\n\n";
+
 
 		System.out.println(result);
 	}
