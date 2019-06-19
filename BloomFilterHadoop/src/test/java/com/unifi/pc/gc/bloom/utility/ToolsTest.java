@@ -26,7 +26,7 @@ public class ToolsTest {
 	public void testReadFile() {
 		List<String> rows=Tools.readFile(filepath+filename);
 		assertNotEquals(0, rows.size());
-		assertEquals(10000, rows.size());
+		assertEquals(500000, rows.size());
 	}
 	
 	@Test
